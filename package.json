@@ -1,9 +1,10 @@
 {
   "name": "creator-studio-ai",
   "version": "1.0.0",
-  "private": true,
-  "type": "module",
+  "description": "AI Caption Generator",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js"
-  }
+  },
+  "dependencies": {}
 }

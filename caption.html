@@ -1,34 +1,40 @@
-<script>
-async function generateCaption() {
-  const topic = document.getElementById("topic").value.trim();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Caption - Creator Studio AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-  if (!topic) {
-    alert("Please enter a topic.");
-    return;
-  }
+<div class="container">
+  <h1>🤖 AI Caption Generator</h1>
+  <p>Generate viral captions using AI</p>
 
-  const result = document.getElementById("result");
-  result.innerHTML = "⏳ Generating...";
+  <textarea
+    id="prompt"
+    placeholder="Example: Instagram post about Assam tea"
+    rows="6"></textarea>
 
-  try {
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ topic })
-    });
+  <button onclick="generateCaption()">
+    ✨ Generate Caption
+  </button>
 
-    const data = await response.json();
+  <div id="result"></div>
 
-    if (!response.ok) {
-      result.innerHTML = "❌ " + (data.error || "Unknown error");
-      return;
-    }
+  <button onclick="copyCaption()">
+    📋 Copy Caption
+  </button>
 
-    result.innerHTML = data.caption;
-  } catch (err) {
-    result.innerHTML = "❌ Connection error: " + err.message;
-  }
-}
-</script>
+  <br><br>
+
+  <button onclick="window.location.href='index.html'">
+    ⬅ Back to Home
+  </button>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

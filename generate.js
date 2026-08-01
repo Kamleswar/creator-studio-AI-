@@ -5,26 +5,17 @@ export default async function handler(req, res) {
     });
   }
 
-  const API_KEY = process.env.GEMINI_API_KEY;
-
-  if (!API_KEY) {
-    return res.status(500).json({
-      error: "Gemini API key configure nahi hui."
-    });
-  }
-
   try {
-    const { topic } = req.body;
+    const { prompt } = req.body;
 
-    if (!topic) {
+    if (!prompt) {
       return res.status(400).json({
-        error: "Topic required hai."
+        error: "Prompt is required"
       });
     }
 
     const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" +
-        API_KEY,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: {
@@ -35,10 +26,7 @@ export default async function handler(req, res) {
             {
               parts: [
                 {
-                  text:
-                    "Create a catchy social media caption for this topic: " +
-                    topic +
-                    ". Make it engaging, short, and suitable for Assam creators. Include relevant hashtags."
+                  text: `Write a catchy social media caption for: ${prompt}`
                 }
               ]
             }
@@ -50,21 +38,18 @@ export default async function handler(req, res) {
     const data = await response.json();
 
     if (!response.ok) {
-      return res.status(response.status).json({
-        error: data?.error?.message || "Gemini API error"
-      });
+      return res.status(response.status).json(data);
     }
 
     const caption =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      data.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "Caption could not be generated.";
 
-    return res.status(200).json({
-      caption: caption || "Caption generate nahi hua."
-    });
+    res.status(200).json({ caption });
 
-  } catch (error) {
-    return res.status(500).json({
-      error: error.message || "Server error"
+  } catch (err) {
+    res.status(500).json({
+      error: err.message
     });
   }
 }

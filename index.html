@@ -1,198 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creator Studio AI</title>
 
-<title>Creator Studio AI</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header class="header">
+  <div class="container">
 
-  <div class="logo">
-
-    <div class="logo-icon">🤖</div>
-
-    <div>
-      <h1>Creator Studio AI</h1>
-      <p>Made in Assam</p>
-    </div>
-
-  </div>
-
-  <div class="credits">
-    💎 <span id="creditCount">100</span>
-  </div>
-
-</header>
-
-
-<section class="welcome">
-
-  <h2>👋 Welcome Creator</h2>
-
-  <p>Create Smarter. Grow Faster.</p>
-
-</section>
-
-
-<div class="search-box">
-
-  <input
-    type="text"
-    id="toolSearch"
-    placeholder="Search AI Tools..."
-  >
-
-</div>
-
-
-<section class="tools" id="tools">
-
-  <div class="card">
-
-    <h3>🤖 AI Caption</h3>
-
+    <h1>🤖 Creator Studio AI</h1>
     <p>Create viral captions instantly.</p>
 
-    <button onclick="openCaption()">Open</button>
-
-  </div>
-
-
-  <div class="card">
-
-    <h3>🎬 Reel Script</h3>
-
-    <p>Generate engaging scripts.</p>
-
-    <button>Open</button>
-
-  </div>
-
-
-  <div class="card">
-
-    <h3>#️⃣ Hashtag Generator</h3>
-
-    <p>Find trending hashtags.</p>
-
-    <button>Open</button>
-
-  </div>
-
-
-  <div class="card">
-
-    <h3>💡 Viral Ideas</h3>
-
-    <p>Get today's viral ideas.</p>
-
-    <button>Open</button>
-
-  </div>
-
-
-  <div class="card">
-
-    <h3>📝 YouTube Title</h3>
-
-    <p>Generate clickable titles.</p>
-
-    <button>Open</button>
-
-  </div>
-
-
-  <div class="card">
-
-    <h3>🎯 Hook Generator</h3>
-
-    <p>Create powerful opening hooks.</p>
-
-    <button>Open</button>
-
-  </div>
-
-</section>
-
-
-<!-- AI CAPTION SCREEN -->
-
-<section class="caption-screen" id="captionScreen">
-
-  <button class="back-btn" onclick="closeCaption()">
-    ← Back
-  </button>
-
-  <div class="caption-box">
-
-    <h2>🤖 AI Caption Generator</h2>
-
-    <p>Create engaging captions for your social media posts.</p>
-
     <textarea
-      id="captionTopic"
-      placeholder="Example: Assam nature, tea garden, village life..."
-    ></textarea>
+      id="prompt"
+      placeholder="Type your post topic here..."
+      rows="6"></textarea>
 
-    <button class="generate-btn" onclick="generateCaption()">
+    <button onclick="generateCaption()">
       ✨ Generate Caption
     </button>
 
-    <div class="result-box" id="captionResult">
+    <div id="result"></div>
 
-      <p>Your AI caption will appear here.</p>
-
-    </div>
-
-    <button
-      class="copy-btn"
-      id="copyCaption"
-      onclick="copyCaption()"
-    >
+    <button onclick="copyCaption()">
       📋 Copy Caption
     </button>
 
   </div>
 
-</section>
-
-
-<section class="reward">
-
-  <h2>🎁 Daily Reward</h2>
-
-  <p>Claim 20 AI Credits</p>
-
-  <button id="rewardButton">
-    Claim Reward
-  </button>
-
-</section>
-
-
-<nav class="bottom-nav">
-
-  <a href="#">🏠<br>Home</a>
-
-  <a href="#">🤖<br>AI</a>
-
-  <a href="#">🎁<br>Rewards</a>
-
-  <a href="#">👤<br>Profile</a>
-
-</nav>
-
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 
 </body>
 </html>
