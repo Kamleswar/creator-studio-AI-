@@ -1,5 +1,8 @@
 async function generateCaption() {
   const prompt = document.getElementById("prompt").value.trim();
+  const language = document.getElementById("language").value;
+  const tone = document.getElementById("tone").value;
+  const emoji = document.getElementById("emoji").checked;
   const result = document.getElementById("result");
 
   if (!prompt) {
@@ -7,7 +10,7 @@ async function generateCaption() {
     return;
   }
 
-  result.innerHTML = "⏳ Generating caption...";
+  result.innerHTML = "⏳ Generating captions...";
 
   try {
     const response = await fetch("/api/generate", {
@@ -16,18 +19,19 @@ async function generateCaption() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        prompt: prompt
+        prompt,
+        language,
+        tone,
+        emoji
       })
     });
 
     const data = await response.json();
 
-    if (data.caption) {
-      result.innerHTML = data.caption;
-    } else if (data.error) {
-      result.innerHTML = "❌ " + data.error;
+    if (response.ok && data.caption) {
+      result.innerHTML = `<pre>${data.caption}</pre>`;
     } else {
-      result.innerHTML = "❌ Failed to generate caption.";
+      result.innerHTML = "❌ " + (data.error || "Failed to generate captions.");
     }
 
   } catch (error) {
@@ -38,11 +42,12 @@ async function generateCaption() {
 function copyCaption() {
   const text = document.getElementById("result").innerText;
 
-  if (!text || text.startsWith("⏳") || text.startsWith("⚠️")) {
+  if (!text || text.includes("Generating")) {
     alert("No caption to copy.");
     return;
   }
 
-  navigator.clipboard.writeText(text);
-  alert("✅ Caption copied!");
+  navigator.clipboard.writeText(text)
+    .then(() => alert("✅ Caption copied!"))
+    .catch(() => alert("❌ Copy failed."));
 }

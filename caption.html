@@ -9,19 +9,57 @@
 <body>
 
 <div class="container">
-  <h1>🤖 AI Caption Generator</h1>
-  <p>Generate viral captions using AI</p>
 
+  <h1>🤖 AI Caption Generator</h1>
+  <p>Create viral captions in seconds</p>
+
+  <label><b>Topic</b></label>
   <textarea
     id="prompt"
-    placeholder="Example: Instagram post about Assam tea"
-    rows="6"></textarea>
+    rows="5"
+    placeholder="Example: Instagram Reel about Assam Tea">
+  </textarea>
+
+  <br><br>
+
+  <label><b>Language</b></label>
+  <select id="language">
+    <option value="English">English</option>
+    <option value="Hindi">Hindi</option>
+    <option value="Assamese">Assamese</option>
+  </select>
+
+  <br><br>
+
+  <label><b>Tone</b></label>
+  <select id="tone">
+    <option value="Viral">🔥 Viral</option>
+    <option value="Funny">😂 Funny</option>
+    <option value="Professional">💼 Professional</option>
+    <option value="Motivational">💪 Motivational</option>
+  </select>
+
+  <br><br>
+
+  <label>
+    <input type="checkbox" id="emoji" checked>
+    Include Emojis 😊
+  </label>
+
+  <br><br>
 
   <button onclick="generateCaption()">
-    ✨ Generate Caption
+    ✨ Generate 5 Captions
   </button>
 
+  <button onclick="generateCaption()">
+    🔄 Regenerate
+  </button>
+
+  <br><br>
+
   <div id="result"></div>
+    <br>
 
   <button onclick="copyCaption()">
     📋 Copy Caption
@@ -32,6 +70,7 @@
   <button onclick="window.location.href='index.html'">
     ⬅ Back to Home
   </button>
+
 </div>
 
 <script src="script.js"></script>
